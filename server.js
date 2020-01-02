@@ -46,7 +46,8 @@ io.on('connect', (socket) => {
     io.to(`${room}`).emit('client connected', Object.keys(io.sockets.sockets))
     //SEND & RECIEVE MESSAGES
     socket.on('chat message', (user, msg) => {
-        messages.push(msg)
+        //
+        // messages.push(msg)
         console.log(msg);
         socket.emit('chat message', (user + ': ' + msg))
     })
