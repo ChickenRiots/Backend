@@ -47,12 +47,13 @@ io.on('connect', (socket) => {
         console.log(msg);
         socket.emit('chat message', (user + ': ' + msg))
     })
+    //ANIMATION
     socket.on('animate', (id, type) => {
         socket.emit('animate', ({id: id, type: type}))
     })
     socket.on('disconnect', () => {
         console.log('A user has disconnected!')
-        io.emit('client connected', (connectedClients.splice(connectClients.indexOf(Object.keys(io.sockets.sockets), 1))))
+        io.emit('client connected', (connectedClients.splice(connectedClients.indexOf(Object.keys(io.sockets.sockets), 1))))
         io.removeAllListeners('connection')
         io.removeAllListeners('disconnect')
     })
