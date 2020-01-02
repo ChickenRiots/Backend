@@ -27,6 +27,7 @@ app.get('/', (req, res) => {
 //MEMORY 
 const connectedClients = []
 
+
 //DEFAULT SOCKET CODE
 io.on('connect', (socket) => {
     console.log('A user has connected!')
@@ -38,7 +39,7 @@ io.on('connect', (socket) => {
     console.log(room);
     //JOIN CUSTOM ROOM
     socket.join(`${room}`)
-    //LIST OF CONNECTED CLIENTS 
+    //LIST OF CONNECTED CLIENTS
     connectedClients.push(Object.keys(io.sockets.sockets))
     io.to(`${room}`).emit('client connected', connectedClients)
     //SEND & RECIEVE MESSAGES
@@ -48,6 +49,7 @@ io.on('connect', (socket) => {
     });
     socket.on('disconnect', () => {
         console.log('A user has disconnected!')
+        io.emit('client connected', (connectedClients.splice(connectClients.indexOf(Object.keys(io.sockets.sockets), 1))))
         io.removeAllListeners('connection')
         io.removeAllListeners('disconnect')
     })
