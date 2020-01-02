@@ -40,6 +40,10 @@ io.on('connect', (socket) => {
     //LIST OF CONNECTED CLIENTS 
     connectedClients.push(Object.keys(io.sockets.sockets))
     io.to(`${room}`).emit('client connected', connectedClients)
+    //SEND & RECIEVE MESSAGES
+    socket.on('chat message', (user, msg) => {
+        io.to(`${room}`).emit('chat message', (user + ': ' + msg))
+    });
     socket.on('disconnect', () => {
         console.log('A user has disconnected!')
         io.removeAllListeners('connection')
