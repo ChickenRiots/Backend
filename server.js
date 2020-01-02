@@ -40,7 +40,7 @@ io.on('connect', (socket) => {
     socket.join(`${room}`)
     const messages = []
     //LOAD LIST OF MESSAGES
-    socket.emit('chat message', (messages))
+    socket.emit('allchat', (messages))
     //LIST OF CONNECTED CLIENTS
     connectedClients.push(Object.keys(io.sockets.sockets))
     io.to(`${room}`).emit('client connected', Object.keys(io.sockets.sockets))
