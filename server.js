@@ -41,7 +41,7 @@ io.on('connect', (socket) => {
     socket.join(`${room}`)
     //LIST OF CONNECTED CLIENTS
     connectedClients.push(Object.keys(io.sockets.sockets))
-    io.to(`${room}`).emit('client connected', connectedClients)
+    io.to(`${room}`).emit('client connected', Object.keys(io.sockets.sockets))
     //SEND & RECIEVE MESSAGES
     socket.on('chat message', (user, msg) => {
         console.log(msg);
