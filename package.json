@@ -1,0 +1,25 @@
+{
+  "name": "chickenriot",
+  "version": "1.0.0",
+  "description": "socket.io & node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChickenRiots/Backend.git"
+  },
+  "author": "Tyler Spaulding",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChickenRiots/Backend/issues"
+  },
+  "homepage": "https://github.com/ChickenRiots/Backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "socket.io": "^2.3.0"
+  }
+}
