@@ -27,15 +27,28 @@ app.get('/', (req, res) => {
 //MEMORY 
 const connectedClients = []
 
-//SOCKET CODE
+//DEFAULT SOCKET CODE
 io.on('connect', (socket) => {
     console.log('A user has connected!')
+    //GET ROOM FROM CLIENT
+    let room = ''
+    io.on('room', (newRoom) => {
+        room = newRoom
+    })
+    //JOIN CUSTOM ROOM
+    socket.join(`${room}`)
     //LIST OF CONNECTED CLIENTS 
     connectedClients.push(Object.kets(io.sockets.sockets))
-    io.emit('client connected', connectedClients)
+    io.to(`${room}`).emit('client connected', connectedClients)
     socket.on('disconnect', () => {
         console.log('A user has disconnected!')
         io.removeAllListeners('connection')
         io.removeAllListeners('disconnect')
     })
 })
+
+//CUSTOM NAMESPACES 
+// const cnsp = io.of(`${namespace}`)
+// cnsp.on('connection', (socket) => {
+//     console.log(`A user connect to custom namespace" ${namespace}`)
+// })
