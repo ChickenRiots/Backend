@@ -32,7 +32,7 @@ io.on('connect', (socket) => {
     console.log('A user has connected!')
     //GET ROOM FROM CLIENT ('/asedf@!@34d')
     let room = ''
-    scoket.on('room', (newRoom) => { 
+    socket.on('room', (newRoom) => { 
         room = newRoom
     })
     console.log(room);
