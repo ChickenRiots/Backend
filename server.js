@@ -38,7 +38,7 @@ io.on('connect', (socket) => {
     //JOIN CUSTOM ROOM
     socket.join(`${room}`)
     //LIST OF CONNECTED CLIENTS 
-    connectedClients.push(Object.kets(io.sockets.sockets))
+    connectedClients.push(Object.keys(io.sockets.sockets))
     io.to(`${room}`).emit('client connected', connectedClients)
     socket.on('disconnect', () => {
         console.log('A user has disconnected!')
