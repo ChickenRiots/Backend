@@ -44,7 +44,7 @@ io.on('connect', (socket) => {
     //SEND & RECIEVE MESSAGES
     socket.on('chat message', (id, user, msg) => {
         console.log(msg);
-        socket.broadcast.to(id).emit('chat message', (user + ': ' + msg))
+        socket.emit('chat message', (user + ': ' + msg))
     });
     socket.on('disconnect', () => {
         console.log('A user has disconnected!')
