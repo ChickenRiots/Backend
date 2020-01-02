@@ -30,11 +30,12 @@ const connectedClients = []
 //DEFAULT SOCKET CODE
 io.on('connect', (socket) => {
     console.log('A user has connected!')
-    //GET ROOM FROM CLIENT (/asedf@!@34d)
+    //GET ROOM FROM CLIENT ('/asedf@!@34d')
     let room = ''
-    io.on('room', (newRoom) => {
+    io.on('room', (newRoom) => { 
         room = newRoom
     })
+    console.log(room);
     //JOIN CUSTOM ROOM
     socket.join(`${room}`)
     //LIST OF CONNECTED CLIENTS 
