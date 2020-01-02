@@ -38,16 +38,15 @@ io.on('connect', (socket) => {
     console.log(room);
     //JOIN CUSTOM ROOM
     socket.join(`${room}`)
-    // const messages = []
-    // //LOAD LIST OF MESSAGES
-    // socket.emit('allchat', (messages))
+    const messages = []
+    //LOAD LIST OF MESSAGES
+    socket.emit('allchat', (messages))
     //LIST OF CONNECTED CLIENTS
     connectedClients.push(Object.keys(io.sockets.sockets))
     io.to(`${room}`).emit('client connected', Object.keys(io.sockets.sockets))
     //SEND & RECIEVE MESSAGES
     socket.on('chat message', (user, msg) => {
-        //
-        // messages.push(msg)
+        messages.push(msg)
         console.log(msg);
         socket.emit('chat message', (user + ': ' + msg))
     })
@@ -56,51 +55,51 @@ io.on('connect', (socket) => {
         socket.emit('animate', ({id: id, type: type}))
     })
     //YOUTUBE
-    // socket.on('get title', function(data, callback) {
-    //     var videoId = data.videoId
-    //     var user = data.user
+    socket.on('get title', function(data, callback) {
+        var videoId = data.videoId
+        var user = data.user
     
-    //     $.get(
-    //         "https://www.googleapis.com/youtube/v3/videos", {
-    //             part: 'snippet',
-    //             id: videoId,
-    //             key: data.api_key
-    //         },
-    //         function(data) {
-    //             // enqueueNotify(user, data.items[0].snippet.title)
-    //             socket.emit('notify alerts', {
-    //                 alert: 0,
-    //                 user: user,
-    //                 title: data.items[0].snippet.title
-    //             })
-    //             // Does a callback and returns title
-    //             callback({
-    //                 videoId: videoId,
-    //                 title: data.items[0].snippet.title
-    //             })
-    //         }
-    //     )
-    // })
+        $.get(
+            "https://www.googleapis.com/youtube/v3/videos", {
+                part: 'snippet',
+                id: videoId,
+                key: data.api_key
+            },
+            function(data) {
+                // enqueueNotify(user, data.items[0].snippet.title)
+                socket.emit('notify alerts', {
+                    alert: 0,
+                    user: user,
+                    title: data.items[0].snippet.title
+                })
+                // Does a callback and returns title
+                callback({
+                    videoId: videoId,
+                    title: data.items[0].snippet.title
+                })
+            }
+        )
+    })
     
-    // socket.on('get playlist videos', function(data) {
-    //     var playlistId = data.playlistId
-    //     var user = data.user
+    socket.on('get playlist videos', function(data) {
+        var playlistId = data.playlistId
+        var user = data.user
     
-    //     $.get(
-    //         "https://www.googleapis.com/youtube/v3/playlistItems", {
-    //             part: 'snippet,contentDetails',
-    //             playlistId: playlistId,
-    //             maxResults: '50',
-    //             key: data.api_key
-    //         },
-    //         function(data) {
-    //           // Iterate through all of the playlist videos
-    //           for (let video of data.items) {
-    //             enqueueVideo(roomnum, video.contentDetails.videoId)
-    //           }
-    //         }
-    //     )
-    // })
+        $.get(
+            "https://www.googleapis.com/youtube/v3/playlistItems", {
+                part: 'snippet,contentDetails',
+                playlistId: playlistId,
+                maxResults: '50',
+                key: data.api_key
+            },
+            function(data) {
+              // Iterate through all of the playlist videos
+              for (let video of data.items) {
+                enqueueVideo(roomnum, video.contentDetails.videoId)
+              }
+            }
+        )
+    })
     socket.on('disconnect', () => {
         console.log('A user has disconnected!')
         io.emit('client connected', (connectedClients.splice(connectedClients.indexOf(Object.keys(io.sockets.sockets), 1))))
