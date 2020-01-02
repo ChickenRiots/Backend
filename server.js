@@ -43,6 +43,7 @@ io.on('connect', (socket) => {
     io.to(`${room}`).emit('client connected', connectedClients)
     //SEND & RECIEVE MESSAGES
     socket.on('chat message', (user, msg) => {
+        console.log(msg);
         io.to(`${room}`).emit('chat message', (user + ': ' + msg))
     });
     socket.on('disconnect', () => {
