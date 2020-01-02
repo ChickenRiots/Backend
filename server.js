@@ -24,9 +24,15 @@ app.get('/', (req, res) => {
     res.send('<h1>Welcome to the ChickenRiot server!</h1>')
 })
 
+//MEMORY 
+const connectedClients = []
+
 //SOCKET CODE
 io.on('connect', (socket) => {
     console.log('A user has connected!')
+    //LIST OF CONNECTED CLIENTS 
+    connectedClients.push(Object.kets(io.sockets.sockets))
+    io.emit('client connected', connectedClients)
     socket.on('disconnect', () => {
         console.log('A user has disconnected!')
         io.removeAllListeners('connection')
