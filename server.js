@@ -30,7 +30,7 @@ const connectedClients = []
 //DEFAULT SOCKET CODE
 io.on('connect', (socket) => {
     console.log('A user has connected!')
-    //GET ROOM FROM CLIENT
+    //GET ROOM FROM CLIENT (/asedf@!@34d)
     let room = ''
     io.on('room', (newRoom) => {
         room = newRoom
