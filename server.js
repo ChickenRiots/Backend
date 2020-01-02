@@ -26,7 +26,6 @@ app.get('/', (req, res) => {
 
 //MEMORY 
 const connectedClients = []
-const messages = []
 
 //DEFAULT SOCKET CODE
 io.on('connect', (socket) => {
@@ -39,6 +38,7 @@ io.on('connect', (socket) => {
     console.log(room);
     //JOIN CUSTOM ROOM
     socket.join(`${room}`)
+    const messages = []
     //LOAD LIST OF MESSAGES
     socket.emit('chat message', (messages))
     //LIST OF CONNECTED CLIENTS
