@@ -47,7 +47,7 @@ io.on('connect', (socket) => {
     //SEND & RECIEVE MESSAGES
     socket.on('chat message', (user, msg) => {
         messages.push(msg)
-        console.log(msg);
+        console.log(`${msg} from room ${room}`);
         socket.emit('chat message', (user + ': ' + msg))
     })
     //ANIMATION
