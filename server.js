@@ -62,7 +62,7 @@ io.on('connect', (socket) => {
         io.emit('iframe', regex[1])
     })
     //SYNC ALL ROOMS
-    socket.on('sync', (searchTerm) => {
+    socket.on('sync', () => {
         if(searchTerm.length > 0) {
         const regex = /\=(.*)/.exec(searchTerm.slice(searchTerm.length - 1))
         io.emit('sync', regex[1])
@@ -72,7 +72,7 @@ io.on('connect', (socket) => {
     })
     socket.on('disconnect', () => {
         console.log('A user has disconnected!')
-        io.emit('client connected', (connectedClients.splice(connectedClients.indexOf(Object.keys(io.sockets.sockets), 1))))
+        io.emit('client connected', (Object.keys(io.sockets.sockets)))
         io.removeAllListeners('connection')
         io.removeAllListeners('disconnect')
     })
