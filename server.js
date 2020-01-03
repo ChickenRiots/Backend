@@ -56,7 +56,8 @@ io.on('connect', (socket) => {
     })
     //YOUTUBE 
     socket.on('iframe', (data) => {
-        io.emit('iframe', data)
+        const regex = /\=(.*)/.exec(data)
+        io.emit('iframe', regex[1])
     })
     socket.on('disconnect', () => {
         console.log('A user has disconnected!')
