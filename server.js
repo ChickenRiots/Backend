@@ -43,7 +43,7 @@ io.on('connect', (socket) => {
     //LOAD LIST OF MESSAGES
     socket.emit('allchat', (messages))
     //SEND USER ID
-    socket.emit('userId', (socket.io.engine.id))
+    socket.emit('userId', (socket.id))
     //LIST OF CONNECTED CLIENTS
     connectedClients.push(Object.keys(io.sockets.sockets))
     io.to(`${room}`).emit('client connected', Object.keys(io.sockets.sockets))
