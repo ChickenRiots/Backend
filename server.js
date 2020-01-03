@@ -61,7 +61,7 @@ io.on('connect', (socket) => {
     socket.on('iframe', (data) => {
         searchTerm.push(data)
         const regex = /\=(.*)/.exec(data)
-        io.emit('iframe', /\=(.*)/.exec(data))
+        io.emit('iframe', /\=(.*)/.exec(data)[1])
     })
     //SYNC ALL ROOMS
     socket.on('sync', () => {
