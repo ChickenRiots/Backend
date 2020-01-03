@@ -60,7 +60,7 @@ io.on('connect', (socket) => {
     //YOUTUBE 
     socket.on('iframe', (data) => {
         const regex = /\=(.*)/.exec(data)[1]
-        console.log(regex);
+        console.log(regex)
         searchTerm.push(regex)
         io.emit('iframe', regex)
     })
@@ -68,7 +68,7 @@ io.on('connect', (socket) => {
     socket.on('sync', () => {
         if(searchTerm.length > 0) {
         const term = searchTerm.slice(searchTerm.length - 1)
-        io.emit('iframe', term)
+        io.emit('sync', term)
         } else {
             io.emit('sync', 'dQw4w9WgXcQ') //YOU'VE BEEN RICK ROLLED
         }
