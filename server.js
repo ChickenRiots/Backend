@@ -52,53 +52,11 @@ io.on('connect', (socket) => {
     })
     //ANIMATION
     socket.on('animate', (id, type) => {
-        socket.emit('animate', ({id: id, type: type}))
+        io.emit('animate', ({id: id, type: type}))
     })
-    //YOUTUBE
-    socket.on('get title', function(data, callback) {
-        var videoId = data.videoId
-        var user = data.user
-    
-        $.get(
-            "https://www.googleapis.com/youtube/v3/videos", {
-                part: 'snippet',
-                id: videoId,
-                key: data.api_key
-            },
-            function(data) {
-                // enqueueNotify(user, data.items[0].snippet.title)
-                socket.emit('notify alerts', {
-                    alert: 0,
-                    user: user,
-                    title: data.items[0].snippet.title
-                })
-                // Does a callback and returns title
-                callback({
-                    videoId: videoId,
-                    title: data.items[0].snippet.title
-                })
-            }
-        )
-    })
-    
-    socket.on('get playlist videos', function(data) {
-        var playlistId = data.playlistId
-        var user = data.user
-    
-        $.get(
-            "https://www.googleapis.com/youtube/v3/playlistItems", {
-                part: 'snippet,contentDetails',
-                playlistId: playlistId,
-                maxResults: '50',
-                key: data.api_key
-            },
-            function(data) {
-              // Iterate through all of the playlist videos
-              for (let video of data.items) {
-                enqueueVideo(roomnum, video.contentDetails.videoId)
-              }
-            }
-        )
+    //YOUTUBE 
+    socket.on('iframe', (data) => {
+        io.emit('iframe', data)
     })
     socket.on('disconnect', () => {
         console.log('A user has disconnected!')
