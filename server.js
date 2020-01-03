@@ -59,9 +59,9 @@ io.on('connect', (socket) => {
     })
     //YOUTUBE 
     socket.on('iframe', (data) => {
+        searchTerm.push(data)
         const regex = /\=(.*)/.exec(data)[1]
         console.log(regex)
-        searchTerm.push(regex)
         io.emit('iframe', regex)
     })
     //SYNC ALL ROOMS
@@ -69,7 +69,7 @@ io.on('connect', (socket) => {
         if(searchTerm.length > 0) {
         const term = searchTerm.slice(searchTerm.length - 1)
         console.log(term)
-        io.emit('sync', `https://www.youtube.com/watch?v=${term}`)
+        io.emit('sync', term`)
         } else {
             io.emit('sync', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ') //YOU'VE BEEN RICK ROLLED
         }
