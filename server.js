@@ -59,15 +59,15 @@ io.on('connect', (socket) => {
     })
     //YOUTUBE 
     socket.on('iframe', (data) => {
-        searchTerm.push(data)
         const regex = /\=(.*)/.exec(data)
-        io.emit('iframe', /\=(.*)/.exec(data)[1])
+        searchTerm.push(regex[1])
+        io.emit('iframe', regex[1])
     })
     //SYNC ALL ROOMS
     socket.on('sync', () => {
         if(searchTerm.length > 0) {
-        const regex = /\=(.*)/.exec(searchTerm.slice(searchTerm.length - 1))
-        io.emit('sync', regex[1])
+        const term = searchTerm.slice(searchTerm.length - 1)
+        io.emit('sync', term)
         } else {
             io.emit('sync', 'dQw4w9WgXcQ') //YOU'VE BEEN RICK ROLLED
         }
