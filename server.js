@@ -42,6 +42,8 @@ io.on('connect', (socket) => {
     const messages = []
     //LOAD LIST OF MESSAGES
     socket.emit('allchat', (messages))
+    //SEND USER ID
+    socket.emit('userId', (socket.io.engine.id))
     //LIST OF CONNECTED CLIENTS
     connectedClients.push(Object.keys(io.sockets.sockets))
     io.to(`${room}`).emit('client connected', Object.keys(io.sockets.sockets))
