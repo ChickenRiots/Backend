@@ -59,9 +59,9 @@ io.on('connect', (socket) => {
     })
     //YOUTUBE 
     socket.on('iframe', (data) => {
-        const regex = /\=(.*)/.exec(data)
-        searchTerm.push(regex[1])
-        io.emit('iframe', regex[1])
+        const regex = /\=(.*)/.exec(data)[1]
+        searchTerm.push(regex)
+        io.emit('iframe', regex)
     })
     //SYNC ALL ROOMS
     socket.on('sync', () => {
