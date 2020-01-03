@@ -60,6 +60,7 @@ io.on('connect', (socket) => {
     //YOUTUBE 
     socket.on('iframe', (data) => {
         const regex = /\=(.*)/.exec(data)[1]
+        console.log(regex);
         searchTerm.push(regex)
         io.emit('iframe', regex)
     })
