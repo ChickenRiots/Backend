@@ -68,7 +68,7 @@ io.on('connect', (socket) => {
     socket.on('sync', () => {
         if(searchTerm.length > 0) {
         const term = searchTerm.slice(searchTerm.length - 1)
-        io.emit('sync', term)
+        io.emit('iframe', term)
         } else {
             io.emit('sync', 'dQw4w9WgXcQ') //YOU'VE BEEN RICK ROLLED
         }
