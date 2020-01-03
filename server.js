@@ -26,6 +26,7 @@ app.get('/', (req, res) => {
 
 //MEMORY 
 const connectedClients = []
+const searchTerm = []
 
 //DEFAULT SOCKET CODE
 io.on('connect', (socket) => {
@@ -52,12 +53,22 @@ io.on('connect', (socket) => {
     })
     //ANIMATION
     socket.on('animate', (id, type) => {
-        io.emit('animate', ({id: id, type: type}))
+        io.emit('animate', ({id: id, type: type}))  
     })
     //YOUTUBE 
     socket.on('iframe', (data) => {
+        searchTerm.push(data)
         const regex = /\=(.*)/.exec(data)
         io.emit('iframe', regex[1])
+    })
+    //SYNC ALL ROOMS
+    socket.on('sync', (searchTerm) => {
+        if(searchTerm.length > 0) {
+        const regex = /\=(.*)/.exec(searchTerm.slice(searchTerm.length - 1))
+        io.emit('sync', regex[1])
+        } else {
+            io.emit('sync', 'dQw4w9WgXcQ') //YOU'VE BEEN RICK ROLLED
+        }
     })
     socket.on('disconnect', () => {
         console.log('A user has disconnected!')
