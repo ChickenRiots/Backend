@@ -69,7 +69,7 @@ io.on('connect', (socket) => {
         if(searchTerm.length > 0) {
         const term = searchTerm.slice(searchTerm.length - 1)
         console.log(term)
-        io.emit('sync', term`)
+        io.emit('sync', term)
         } else {
             io.emit('sync', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ') //YOU'VE BEEN RICK ROLLED
         }
