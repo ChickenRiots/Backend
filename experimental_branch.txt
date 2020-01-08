@@ -1,0 +1,3 @@
+This branch will be used to create a single host streaming service.
+Where admin is host and can pass host, videos are synced for everyone, 
+and a video que.
